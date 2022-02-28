@@ -46,14 +46,13 @@ void create_item() {
 }
 
 void remove_item() {
-    string name, empty_pos;
+    string name;
     cout << "item to remove name: ";
     cin >> name;
 
     for (int i = 0; i < inv_occupied_slots; i++) {
         if (inv[i] == name) {
             inv[i] = " ";
-            empty_pos = i;
         }
     }
 
