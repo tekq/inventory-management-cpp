@@ -45,6 +45,29 @@ void create_item() {
     inv_occupied_slots++;
 }
 
+void remove_item() {
+    string name, empty_pos;
+    cout << "item to remove name: ";
+    cin >> name;
+
+    for (int i = 0; i < inv_occupied_slots; i++) {
+        if (inv[i] == name) {
+            inv[i] = " ";
+            empty_pos = i;
+        }
+    }
+
+    // filter out empty slots
+    for (int i = 0; i < inv_occupied_slots; i++) { 
+        if (inv[i] == " ") {
+            string tmp;
+            tmp = inv[i + 2];
+            inv[i] = inv[i + 1];
+            inv[i + 1] = tmp;
+            inv_occupied_slots--;
+        }
+    }
+}
 // Show inventory
 void inv_menu() {
     cout << "Inventory items: ";
@@ -55,12 +78,14 @@ void inv_menu() {
 }
 
 int main() {
-    if (scanned_inv_save == false)
+    if (scanned_inv_save == false) // necessary for inventory saving to work properly
         read_inv();
 
     string name;
     cout << "Simple Inventory\n";
     cout << "Press 'i' to check inventory or 'c' to create an item.\n";
+    cout << "Inventory items: " << inv_occupied_slots << "\n";
+    cout << endl;
 
     cin >> beggining_choice;
 
@@ -76,6 +101,10 @@ int main() {
         return 0;
     } else if (beggining_choice == "r") {
         read_inv();
+        main();
+    } else if (beggining_choice == "d") {
+        remove_item();
+        main();
     } else {
         main();
     }
