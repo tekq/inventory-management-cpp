@@ -53,9 +53,9 @@ void remove_item() {
     for (int i = 0; i < inv_occupied_slots; i++) {
         if (inv[i] == name) {
             inv[i] = " ";
+            break;
         }
     }
-
     // filter out empty slots
     for (int i = 0; i < inv_occupied_slots; i++) { 
         if (inv[i] == " ") {
